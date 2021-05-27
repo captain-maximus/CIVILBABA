@@ -56,6 +56,7 @@ export const styles = StyleSheet.create({
     color: 'red',
     margin: 32,
     flex: 1,
+    fontSize: 16
   },
   mobileInputStyle: {
     backgroundColor: 'white',

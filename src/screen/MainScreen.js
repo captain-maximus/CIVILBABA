@@ -11,25 +11,26 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import {styles} from './styles';
+import {common} from '../constants/Common';
 
 const MainScreen = () => {
   const [mobileNo, setMobileNo] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [text, setText] = useState(
-    'Use your registered mobile number to log in:',
+    common.ENTER_NUMBER,
   );
   const [isLoaderVisible, setIsLoaderVisible] = useState(false);
 
   const enterPressed = () => {
     if (!mobileNo || mobileNo.length < 10) {
       setIsValid(false);
-      setText('* Please enter a valid mobile number .');
+      setText(common.ERROR_VALID);
     } else {
       setIsLoaderVisible(true);
       setTimeout(() => {
         setIsValid(false);
         setText(
-          '* The mobile number you have entered is not registered with us. PLease enter a registered mobile number .',
+          common.ERROR_REGISTERED,
         );
         setIsLoaderVisible(false);
       }, 2000);
@@ -52,14 +53,14 @@ const MainScreen = () => {
             source={require('../assets/icon.png')}
             resizeMode={'contain'}
           />
-          <Text style={styles.titleStyle}>CIVILBABA</Text>
+          <Text style={styles.titleStyle}>{common.APP_TITLE}</Text>
         </View>
 
         {/* Bottom Container */}
 
         <View style={styles.bottomContainer}>
           <Text style={[styles.termsTitleStyle, {marginBottom: 6}]}>
-            By signing in , you agree to our
+            {common.TERMS_FIRST_LINE}
           </Text>
           <View style={styles.termsContainerStyle}>
             <Text
@@ -67,12 +68,12 @@ const MainScreen = () => {
                 styles.termsTitleStyle,
                 {color: 'white', marginRight: 6},
               ]}>
-              terms and services
+              {common.TERMS_AND_SERVICES}
             </Text>
-            <Text style={styles.termsTitleStyle}>and</Text>
+            <Text style={styles.termsTitleStyle}>{common.AND}</Text>
             <Text
               style={[styles.termsTitleStyle, {color: 'white', marginLeft: 6}]}>
-              privacy policy.
+              {common.PRIVACY_POLICY}
             </Text>
           </View>
         </View>
@@ -84,13 +85,13 @@ const MainScreen = () => {
             <Text
               style={[
                 styles.errorTextStyle,
-                {color: isValid ? 'Black' : 'red'},
+                {color: isValid ? 'black' : 'red'},
               ]}>
               {text}
             </Text>
             <TextInput
               style={styles.mobileInputStyle}
-              placeholder="MOBILE  NUMBER"
+              placeholder={common.MOBILE_NUMBER}
               placeholderTextColor="black"
               maxLength={10}
               keyboardType={'numeric'}
@@ -102,7 +103,7 @@ const MainScreen = () => {
               {isLoaderVisible ? (
                 <ActivityIndicator size="small" color="#fbb03b" />
               ) : null}
-              <Text style={styles.buttonTitleStyle}>ENTER</Text>
+              <Text style={styles.buttonTitleStyle}>{common.ENTER}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.backShadow} />
